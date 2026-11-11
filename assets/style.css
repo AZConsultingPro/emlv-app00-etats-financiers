@@ -109,7 +109,7 @@ textarea{min-height:100px;resize:vertical}
 .feedback details{margin-top:.3rem}
 .formats{margin:.3rem 0 .6rem;color:var(--muted);font-size:.85rem}
 .pill{display:inline-block;border-radius:999px;background:var(--wash);color:var(--teal-dark);padding:.25rem .7rem;font-size:.85rem;font-weight:650}
-#transfer{margin-top:1rem}
+#transfer,#evaluation{margin-top:1rem}
 dialog{color:var(--ink);border:1px solid var(--line);border-radius:13px;width:min(510px,calc(100% - 28px));max-height:85vh;padding:1.2rem 1.35rem}
 dialog::backdrop{background:#183a3690}
 dialog h2{margin:.5rem 0 .8rem}

@@ -4,6 +4,7 @@
   const main=document.querySelector('main');
   const dialog=document.querySelector('#definition');
   const banner=document.querySelector('#notice');
+  const evaluations=window.EMLVEvaluations||{};
   const questions=[...C.practice,...C.transfers,...C.quiz,...C.challenge];
   const routes=new Set(['accueil','lexique','defi','quiz','synthese','carnet',...C.blocks.flatMap(b=>['cours/'+b.id,'activite/'+b.id])]);
   const dst='https://azconsultingpro.github.io/emlv-chapitre1-prepa-dst/';
@@ -126,10 +127,12 @@
     const show=state.solved||state.revealed;
     const required=M.transferRequired(book,b.id), done=M.consolidated(book,b.id);
     const status=done?'Bloc consolidé localement':show&&required?'Micro-transfert à réussir':'Activité en cours';
+    const evaluation=evaluations[b.id];
     return '<div class="breadcrumbs">'+link('accueil','← Sommaire')+' · '+lessonLink(b.id,'Cours du bloc')+'</div>'+
       head('Activité · Bloc '+(index+1)+' sur 5',b.title,b.question)+'<div class="columns"><div>'+
       panel('À vous de jouer',question(exercise,'practice'))+
       (show?'<div id="transfer">'+panel('Micro-transfert','<p class="meta">'+(required?'Appliquez le raisonnement dans ce nouveau cas pour consolider le bloc.':'Essayez la méthode dans un autre cas.')+'</p>'+question(transfer,'transfer'),'tinted')+'</div>':'')+
+      (evaluation?'<div id="evaluation">'+panel('Évaluation du bloc','<p>Après l’activité, répondez aux quatre questions dans Google Forms. Après l’envoi, sélectionnez « Afficher les résultats » pour lire votre note et les corrections.</p>'+external(esc(evaluation),'Ouvrir le quiz du bloc','button primary'),'tinted')+'</div>':'')+
       '<div class="footnav">'+lessonLink(b.id,'← Relire le cours')+
       (done?link(index<4?'cours/'+C.blocks[index+1].id:'synthese',index<4?'Passer au bloc suivant →':'Passer à la synthèse →','button primary'):'')+'</div></div><aside>'+
       panel('Dans ce bloc','<p>'+b.short+'</p><p class="pill">'+status+'</p>','sand')+'</aside></div>';
