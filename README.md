@@ -1,2 +1,3 @@
-# emlv-app00-etats-financiers
-Application pédagogique EMLV · Découvrir les états financiers
+# App 00 EMLV
+
+Découvrir les états financiers. Parcours d’introduction au pilotage de la performance financière.
