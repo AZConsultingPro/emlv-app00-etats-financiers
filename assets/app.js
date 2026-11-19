@@ -119,7 +119,7 @@
     return '<form data-question="'+q.id+'" data-mode="'+mode+'" novalidate><p>'+q.prompt+'</p><fieldset><legend>'+
       (q.options?'Choisissez une seule réponse.':'Montant en euros')+'</legend>'+fields+'</fieldset><div class="actions">'+
       (locked?'':'<button class="button primary" type="submit">Vérifier</button>')+lessonLink(q.block,'Consulter le cours')+
-      '</div><div class="question-result" aria-live="polite" aria-atomic="true">'+feedback(q,state,mode)+'</div></form>';
+      '</div>'+RevisionEMLV.guide(q.hints,RevisionEMLV.sol(q.options?q.options[q.answer]:q.answer+' €',q.success.replace(/<[^>]*>/g,'')),q.prompt)+'<div class="question-result" aria-live="polite" aria-atomic="true">'+feedback(q,state,mode)+'</div></form>';
   }
 
   function activity(b,index) {
@@ -258,7 +258,7 @@
       main.querySelector('[data-action="confirm"]').focus();
     } catch {notice('Le fichier est illisible.');}
   }
-  function action(name) {
+  document.querySelector('[data-er-exp]').onclick=()=>action('export');document.querySelector('[data-er-imp]').onclick=()=>{if(route!=='carnet'){history.pushState(null,'','#carnet');pending=null;render();}main.querySelector('#import-file').click();};function action(name) {
     if (name==='export') {download('EMLV_App00_carnet.json',JSON.stringify(book,null,2));return;}
     if (name==='raw-export') {
       try {
